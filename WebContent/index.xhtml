@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Teste JSF</title>
+</h:head>
+	
+<h:body>
+	
+	<f:view>
+		<!-- Expression Language JSF  -->
+		<h2><h:outputLabel value="Hello World"></h:outputLabel></h2>		
+		<p>
+			<strong> <h:outputText value="Nome: "/></strong>
+			<h:outputText value="#{estudanteBean.estudante.nome}"/>
+		</p>
+		<p>
+			<p:importEnum type="bean.estudante.model.enums.Turno" 
+			var="turnos" allSuffix="ALL_ENUM_VALUES" />  
+	
+			
+			<strong> <h:outputText value="Sobrenome: "/></strong>
+			<h:outputText value="#{estudanteBean.estudante.sobrenome}"/><br/>
+			<h:outputText value="#{estudanteBean.estudante.nota1 eq estudanteBean.estudante.nota2 and estudanteBean.estudante.nome.equals('Victor')}"/><br/>
+			<h:outputText value="#{estudanteBean.estudante.nota1 le estudanteBean.estudante.nota3}"/><br/>
+			<h:outputText value="#{estudanteBean.estudante.nota1 eq 0 ? 'ZERO' : 'NAO ZERO'}"/><br/>
+			<h:outputText value="#{estudanteBean.estudante.nota1 = 40}"/><br/>
+			<h:outputText value="#{estudanteBean.estudante.nota1}"/><br/>
+			<h:outputText value="#{estudanteBean.estudante.nome += 'AlgumaCOisa'}"/><br/>
+			<h:outputText value="ENUM"/><br/>
+			<h:outputText value="#{estudanteBean.estudante.turno eq turnos.MATUTINO}"/><br/>
+			
+			<ui:repeat var="turno" value="#{turnos.ALL_ENUM_VALUES}">
+				<ul>
+					<li>
+						<h:outputText value="#{turno}"/>
+					</li>
+				</ul>
+			</ui:repeat>
+		</p>
+		
+		<!-- Arrays -->
+		<h:outputLabel value="#{estudanteBean.nomesArray[0]}
+		#{estudanteBean.nomesArray[1]} #{estudanteBean.nomesArray[2]}"/>
+		<br/>
+		
+		<ui:repeat var="nome" value="#{estudanteBean.nomesArray}">
+			<h:outputText value="#{nome} "/>
+		</ui:repeat>
+		<br/>
+		<!-- Listas -->
+		<h:outputLabel value="#{estudanteBean.nomesList.get(0)}
+		#{estudanteBean.nomesList.get(1)} #{estudanteBean.nomesList.get(2)}"/>
+		<br/>
+		
+		<ui:repeat var="nome" value="#{estudanteBean.nomesList}">
+			<h:outputText value="#{nome} "/>
+		</ui:repeat>
+		<br/>
+		<!-- SET -->
+		<ui:repeat var="nome" value="#{estudanteBean.nomesSet.toArray()}">
+			<h:outputLabel value="#{nome}"/>
+		</ui:repeat>
+		
+		<!-- MAP -->
+		<br/>
+		<h:outputText value="#{estudanteBean.nomesMap.get('Goku')}"/>
+		<br/>
+		<ui:repeat var="entry" value="#{estudanteBean.nomesMap.entrySet().toArray()}">
+			<h:outputText value="#{entry.key} - #{entry.value}"/>
+		</ui:repeat>
+		<!--
+			Palavras reservadas
+			AND
+			OR
+			NOT
+			eq
+			ne
+			lt
+			gt
+			le
+			ge
+			true
+			false
+			nulll
+			instanceof
+			empty
+			div
+			mod
+		  -->
+		
+	</f:view>
+	
+</h:body>
+</html>
